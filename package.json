@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "steam": "qweqweqwe",
+    "email": "qweqweqwe@mail.ru",
+    "password": "qwxasd3sadfewa",
+    "isbanned": false
+  },
+  {
+    "id": "2",
+    "steam": "q13eweweqweqwe",
+    "email": "q13eweweqweqwe@mail.ru",
+    "password": "qwxasd3fdsfsd34sadfewa",
+    "isbanned": false
+  }
+]

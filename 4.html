@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LAB 4 </title>
+    <script language="JavaScript">
+/**
+ * @return {boolean}
+ */
+function IsEmpty (data){
+	if (data.length==0) return true;
+	else return false
+}
+/**
+ * @return {boolean}
+ */
+function Equal(data) {
+    if (data.Pass2.value==data.Pass1.value) return true;
+		else return false}
+/**
+ * @return {boolean}
+ */
+function IsFormOK(){
+	 	if (IsEmpty(document.F.Pass1.value)) {
+		alert("Поле не может быть пустым!");
+		return false}
+		if (IsEmpty(document.F.Pass2.value)) {
+		alert("Поле не может быть пустым!");
+		return false}
+		if (Equal(document.F)) return true;
+		else { alert ("Пароли должны совпадать");return false}
+}
+
+/**
+ * @return {boolean}
+ */
+function IsForm3OK(){
+	 	if (IsEmpty(document.F1.Myname.value)) {
+		alert("ИМЯ????!");
+		return false}
+		if (!IsNumber(document.F1.Myage.value)) {
+		alert("Возраст от 5 до 100.");
+		return false}
+}
+
+/**
+ * @return {boolean}
+ */
+function IsNumber(data) {
+    if (isFinite(data)){
+        n = parseInt(data);
+        if ((n>5)&&(n<100)) return true;
+        else return false
+    }
+    else return false
+}
+
+function check(form) {
+ var firstname = form.firstname.value;
+  var pass = form.pass.value;
+  var message = form.message.value;
+  var rules;
+  var file = form.fileupload.value;
+  var select=form.number.value;
+  var sex1;
+
+  if (document.form1.sex[0].checked) sex1 = document.form1.sex[0].value;
+else sex1 = document.form1.sex[1].value;
+if (document.form1.rules.checked) rules = 'yes';
+else rules = 'no';
+  var file = form.fileupload.value;
+  var bad = "";
+  if (firstname.length < 3)
+     bad += "Имя слишком короткое" + "\n";
+  if (firstname.length > 32)
+    bad += "Имя слишком длинное" + "\n";
+  if (pass.length < 3)
+    bad += "Пароль слишком короткий" + "\n";
+  if (pass.length > 32)
+    bad += "Пароль слишком длинный" + "\n";
+  if (message.length < 3)
+    bad += "Сообщение слишком короткое" + "\n";
+  if (rules != "yes")
+    bad += "Вы не согласились с правилами" + "\n";
+  if (file.length == 0)
+    bad += "Вы не выбрали файл для загрузки" + "\n";
+  if (bad != "") {
+    bad = "Неверно заполнена форма:" + "\n" + bad;
+    alert(bad);
+    return false;
+  }
+  return true;
+}
+
+    </script>
+</head>
+<body style="font-style: normal;font-family: 'Comic Sans MS'; background-color: powderblue">
+<div class="switch" style="font-size: xx-large" >
+    <span typeof="v:switch">
+        <a href="main.html" rel="v:url" property="v:title">На главную</a>
+    </span>
+</div>
+<div>
+    <h1 style="text-align: center">
+        LAB 4
+    </h1>
+</div>
+<p style="text-align: center"> Первый пример</p>
+<form style="text-align: center" name="F1" onSubmit="return IsForm3OK();">
+Введите ваше имя:
+<input type="text"  name="Myname"><BR>
+Введите ваш возраст:
+<input type="text"  name="Myage"><BR>
+<input type="submit" VALUE ="ОТОСЛАТЬ!">
+</form>
+
+<p style="text-align: center"> Второй пример</p>
+<form style="text-align: center" name = 'form1' action = 'handler.php' method = 'post' onSubmit="return  check(document.form1)">
+  Ваше имя:
+  <input type = 'text' name = 'firstname' />
+  <br />
+  Ваш пароль:
+  <input type = 'password' name = 'pass' />
+  <br />
+  Ваш пол:
+  <input type = 'radio' name = 'sex' value = 'male' checked />M
+  <input type = 'radio' name = 'sex' value = 'female' />F
+  <br />
+  Выберите число:
+  <select name = 'number'>
+    <option selected value = '1'>1</option>
+    <option value = '2'>2</option>
+    <option value = '3'>3</option>
+  </select>
+  <br />
+  Ваше сообщение:
+  <textarea name = 'message'></textarea>
+  <br />
+  Согласитесь с нашими правилами:
+  <input type = 'checkbox' name = 'rules' />
+  <br />
+  <input type = 'hidden' value = 'hidefield' />
+  Загрузите файл:
+  <input type = 'file' name = 'fileupload' />
+  <br />
+  <input type = 'submit' value = 'Отправить' name = 'sub' />
+</form>
+</body>
+<p style="text-align: center">Задание собственной персоной</p>
+<form style="text-align: center" name="F" onSubmit="return IsFormOK();">
+Введите пароль:
+<input type="text"  name="Pass1"><BR>
+Введите пароль ещё раз:
+<input type="text"  name="Pass2"><BR>
+<input type="submit" VALUE ="Ввести">
+</form>
+</html>

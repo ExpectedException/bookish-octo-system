@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LAB 6  </title>
+    <style>
+
+			td{
+				background-color: #CCC;
+			}
+
+		</style>
+		<script type="text/javascript">
+		/* Добавление пунктов заказа */
+		function AddToCart() {
+			var newCell;
+			var oList = document.getElementById('lstProducts');
+			var oReg = document.getElementById('lstReg');
+			var tbl = document.getElementById('tblOrder');
+			/* Определяем значение, введённое в текстовое поле */
+			var qty = document.getElementById('txtQty').value;
+			/* Проверка: распознаётся ли значение как число? Если нет, считаем единицей */
+			if (parseFloat(qty) != qty)
+				qty = 1;
+			/* Вставляем строку в тело таблицы */
+			var oRow = tbl.tBodies[0].insertRow();
+			/* В добавленную строку вставляем, во-первых, checkbox */
+			oRow.insertCell().innerHTML = '<input type="checkbox">';
+			/* во-вторых, текст, взятый из списка выбора продуктов */
+			oRow.insertCell().innerHTML = oList.options[oList.selectedIndex].text;
+			/* в-третьих, цена выбранного продукта */
+			oRow.insertCell().innerHTML = oList.value;
+			/* далее, количество, указанное в текстовом поле */
+			oRow.insertCell().innerHTML = qty;
+			/* затем стоимость пункта заказа */
+			oRow.insertCell().innerHTML = oList.value*qty;
+			oRow.insertCell().innerHTML = oReg.value;
+			oRow.insertCell().innerHTML = oList.value*qty+parseFloat(oReg.value);
+			/* НДС */
+			if(oList.options[oList.selectedIndex].parentNode == document.getElementById('ovosch')){
+				oRow.insertCell().innerHTML = "10";
+			}else if(oList.options[oList.selectedIndex].parentNode == document.getElementById('fruct')){
+				oRow.insertCell().innerHTML = "12";
+			}else if(oList.options[oList.selectedIndex].parentNode == document.getElementById('napit')){
+				oRow.insertCell().innerHTML = "25";
+			}
+			/* Сумму с НДС (после учета скидки)*/
+			oRow.insertCell().innerHTML = (parseFloat(oRow.cells[7].innerHTML)/100+1)*parseFloat(oRow.cells[6].innerHTML);
+			/* и, наконец, кнопку "Удалить" */
+			oRow.insertCell().innerHTML = '<input type="button" value="Удалить" onclick="RemoveProduct(this)"/>';
+			/* По окончании вставки строки необходимо пересчитать сумму заказа */
+			Calculate();
+		}
+
+		function Calculate() {
+			var oList = document.getElementById('lstProducts');
+			var tbl = document.getElementById('tblOrder');
+			var oTFoot = document.getElementById('tfootid');
+			/* Счётчики для количества единиц товара и общей стоимости */
+			var qty = 0, amount = 0, amountSale = 0, amountNDS = 0;
+			/* Цикл по всем строкам в теле таблицы */
+			for (var i = 0, n = tbl.tBodies[0].rows.length; i < n; i++) {
+				/* Увеличиваем qty на значение в 3 столбце текущей строки */
+				qty += parseFloat(tbl.tBodies[0].rows[i].cells[3].innerHTML);
+				/* Увеличиваем amount на значение в 4 столбце текущей строки */
+				amount += parseFloat(tbl.tBodies[0].rows[i].cells[4].innerHTML);
+				/* Увеличиваем amountSale на значение в 6 столбце текущей строки */
+				amountSale += parseFloat(tbl.tBodies[0].rows[i].cells[6].innerHTML);
+				/* Увеличиваем amountNDS на значение в 6 столбце текущей строки */
+				amountNDS += parseFloat(tbl.tBodies[0].rows[i].cells[8].innerHTML);
+			}
+			/* Записываем qty в 3 столбец нижнего колонтитула */
+			tfootid.rows[0].cells[3].innerHTML = qty;
+			/* Записываем amount в 4 столбец нижнего колонтитула */
+			tfootid.rows[0].cells[4].innerHTML = amount;
+			/* Записываем amountSale в 6 столбец нижнего колонтитула*/
+			tfootid.rows[0].cells[6].innerHTML = amountSale;
+			/* Записываем amountNDS в 8 столбец нижнего колонтитула*/
+			tfootid.rows[0].cells[8].innerHTML = amountNDS;
+
+		}
+
+		function RemoveProduct(elem) {
+			var tbl = document.getElementById('tblOrder');
+			tbl.deleteRow(elem.parentNode.parentNode.rowIndex);
+			Calculate();
+		}
+
+		function RemoveSelected() {
+			var tbl = document.getElementById('tblOrder');
+			/* находим все элементы input в теле таблицы */
+			var checks = tbl.tBodies[0].getElementsByTagName('input');
+			var i = 0;
+			/* начинаем перебор элементов в цикле */
+			while (i < checks.length) {
+				/* рассматриваем элемент лишь в том случае, если это checkbox и он отмечен */
+				if (checks[i].type == 'checkbox' && checks[i].checked)
+				/* вызываем функцию, которая удалит строку с пунктом заказа - передаём ей ссылку на checkbox */
+				RemoveProduct(checks[i]);
+				else
+				/* счётчик увеличиваем лишь в том случае, если удаление не было сделано */
+				i++;
+			}
+		}
+
+		function ToggleCheck(elem) {
+			var tbl = document.getElementById('tblOrder');
+			var checks = tbl.tBodies[0].getElementsByTagName('input');
+			var i = 0;
+			if(elem.checked){
+				while (i < checks.length) {
+					checks[i].checked = true;
+					i++;
+				}
+			}else{
+				while (i < checks.length) {
+					checks[i].checked = false;
+					i++;
+				}
+			}
+		}
+
+		</script>
+</head>
+<body style="font-style: normal;font-family: 'Comic Sans MS'; background-color: powderblue">
+<div class="switch" style="font-size: xx-large" >
+    <span typeof="v:switch">
+        <a href="main.html" rel="v:url" property="v:title">На главную</a>
+    </span>
+</div>
+<div>
+    <h1 style="text-align: center">
+        LAB 6
+    </h1>
+</div>
+<div>
+			<select id="lstProducts">
+				<optgroup label="Овощи" id="ovosch">
+					<option value="11">Картошка</option>
+					<option value="12">Морковь</option>
+					<option value="13">Лук</option>
+				</optgroup>
+				<optgroup label="Фрукты" id="fruct">
+					<option value="21">Яблоки</option>
+					<option value="22">Бананы</option>
+				</optgroup>
+				<optgroup label="Напитки" id="napit">
+					<option value="31">Чай</option>
+					<option value="32">Кофе</option>
+				</optgroup>
+			</select>
+            <select id="lstReg">
+                    <option value="1534">г.Москва, 1479 km</option>
+					<option value="3923">Алтайский край, 3653 km</option>
+					<option value="2930">Архангельская область, 2506 km</option>
+					<option value="4614">Республика Карелия, 2060 km</option>
+			</select>
+			Количество:
+			<input type="text" id="txtQty" />
+
+			<input type="button" value="Добавить в корзину" onclick="AddToCart()"/>
+			<table id="tblOrder">
+				<caption align="center">Ваш Закакз</caption>
+				<thead>
+					<tr>
+						<td>
+							<input type="checkbox" onclick="ToggleCheck(this)" />
+						</td>
+						<td>
+							Продукт
+						</td>
+						<td>
+							Цена
+						</td>
+						<td>
+							Количество
+						</td>
+						<td>
+							Сумма
+						</td>
+						<td>
+							Стоимость доставки
+						</td>
+						<td>
+							Общая стоимость
+						</td>
+						<td>
+							НДС(%)
+						</td>
+						<td>
+							Сумма с НДС
+						</td>
+						<td>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				<tfoot id = "tfootid">
+					<tr>
+						<td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+						<td></td>  <td></td>  <td></td>  <td></td>
+
+						<td>
+							<input type="button" value="Удалить отмеченные" onclick="RemoveSelected()" />
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LAB 5  </title>
+    <link rel="stylesheet" type="text/css" href="mainCalc.css" />
+		<script Language="JavaScript">
+		<!--
+			window.onload = function() {
+                //переменные, определенные здесь, доступны и во вложенных функциях
+                var oDigits = document.getElementById('digits');
+                var oSigns = document.getElementById('signs');
+                var oResult = document.getElementById('result');
+                var oClear = document.getElementById('clear');
+                var oCalc = document.getElementById('calculate');
+                var oAcos = document.getElementById('acos');
+                var oRND = document.getElementById('random');
+                var oCeil = document.getElementById('ceil');
+                var oSin = document.getElementById('sin');
+
+
+                //Обрабатываем щелчок мыши по цифрам и знакам
+                oDigits.onclick =
+                    oSigns.onclick =
+                        function (e) {
+                            //Internet Explorer не отправляет ничего
+                            var elem = null; //элемент, на котором произошло событие
+                            if (e) elem = e.target; //работает в FireFox
+                            else elem = window.event.srcElement; //работает в Internet Explorer
+                            if (elem && elem.tagName.toLowerCase() == 'td') {
+                                oResult.innerHTML += elem.innerHTML;
+                            }
+                        }
+                //кнопке Равно (=) требуется специальная обработка
+                oCalc.onclick = function (e) {
+                    if (!e) e = window.event;
+                    e.cancelBubble = true; //запрещаем передачу события родительскому элементу
+                    try { //перехватываем возможное исключение
+                        oResult.innerHTML = eval(oResult.innerHTML); //выполняем расчет выражения, записанного в строке
+                    } catch (ex) {
+                    }
+                }
+
+                oClear.onclick = function (e) {
+                    if (!e) e = window.event;
+                    e.cancelBubble = true; //запрещаем передачу события родительскому элементу
+                    oResult.innerHTML = ""; //выполняем расчет выражения, записанного в строке
+                }
+                oSigns.onmousedown =
+                    oDigits.onmousedown =
+                        function (e) {
+                            var elem = null; //элемент, на котором произошло событие
+                            if (e) elem = e.target; //работает в FireFox
+                            else elem = window.event.srcElement; //работает в Internet Explorer
+                            if (elem && elem.tagName.toLowerCase() == 'td') {
+                                elem.style.color = 'red';
+                            }
+                        }
+                oSigns.onmouseup =
+                    oDigits.onmouseup =
+                        function (e) {
+                            var elem = null; //элемент, на котором произошло событие
+                            if (e) elem = e.target; //работает в FireFox
+                            else elem = window.event.srcElement; //работает в Internet Explorer
+                            if (elem && elem.tagName.toLowerCase() == 'td') {
+                                elem.style.color = '';
+                            }
+                        }
+                oAcos.onclick = function (e) {
+                    if (!e) e = window.event;
+                    e.cancelBubble = true;
+                    oResult.innerHTML = Math.acos(oResult.innerHTML);
+                }
+                oRND.onclick = function (e) {
+                    if (!e) e = window.event;
+                    e.cancelBubble = true;
+                    oResult.innerHTML = Math.random(oResult.innerHTML);
+                }
+                oCeil.onclick = function (e) {
+                    if (!e) e = window.event;
+                    e.cancelBubble = true;
+                    oResult.innerHTML = Math.ceil(oResult.innerHTML);
+                }
+                oSin.onclick = function (e) {
+                    if (!e) e = window.event;
+                    e.cancelBubble = true;
+                    oResult.innerHTML = Math.sin(oResult.innerHTML);
+
+                }
+            }
+		//-->
+		</script>
+
+
+
+
+
+</head>
+<body style="font-style: normal;font-family: 'Comic Sans MS'; background-color: powderblue">
+<div class="switch" style="font-size: xx-large" >
+    <span typeof="v:switch">
+        <a href="main.html" rel="v:url" property="v:title">На главную</a>
+    </span>
+</div>
+<div>
+    <h1 style="text-align: center">
+        LAB 5
+    </h1>
+</div>
+
+<table align="center" id="tableOut">
+
+			<tr>
+
+				<td colspan=2 id="result">
+
+				</td>
+
+
+			</tr>
+
+			<tr>
+				<td class = "whiteBackground">
+
+					<table id = "digits">
+						<tr>
+							<td>
+								7
+							</td>
+							<td>
+								8
+							</td>
+							<td>
+								9
+							</td>
+						</tr>
+							<tr>
+							<td>
+								4
+							</td>
+							<td>
+								5
+							</td>
+							<td>
+								6
+							</td>
+						</tr>
+						<tr>
+							<td>
+								1
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								3
+							</td>
+						</tr>
+						<tr>
+							<td colspan=2>
+								0
+							</td>
+							<td id = "inputDecimal">
+								.
+							</td>
+						</tr>
+
+					</table>
+				</td>
+
+				<td class = "whiteBackground">
+					<table id = "signs">
+
+						<tr>
+							<td>
+								/
+							</td>
+							<td>
+								*
+							</td>
+						</tr>
+						<tr>
+							<td>
+								-
+							</td>
+							<td>
+								+
+							</td>
+						</tr>
+						<tr>
+							<td>
+								(
+							</td>
+							<td>
+								)
+							</td>
+						</tr>
+						<tr>
+							<td id = "clear">
+								C
+							</td>
+							<td id = "calculate">
+								=
+							</td>
+						</tr>
+
+					</table>
+				</td>
+
+			</tr>
+
+			<tr>
+				<td colspan = 2 class = "whiteBackground">
+					<table>
+						<tr>
+							<td id = "acos">
+								acos
+							</td>
+							<td id = "random">
+								RND
+							</td>
+							<td id = "ceil">
+								ceil
+							</td>
+							<td id = "sin">
+								sin
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+		</table>
+</body>
+</html>

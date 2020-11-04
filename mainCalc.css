@@ -1,0 +1,27 @@
+td{
+	text-align: center;
+	vertical-align: center;
+	background-color: #AAA;
+	width: 120px;
+	margin-left: 2px;
+}
+
+tr{
+	height: 40px;
+}
+
+.whiteBackground{
+	background-color:#FFF;
+}
+
+
+#result{
+	background-color: yellow;
+	height: 60px;
+	text-align: right;
+}
+
+#tableOut{
+	border: 2px solid black;
+	caption-side: top;
+}

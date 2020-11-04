@@ -1,0 +1,51 @@
+body {
+    width: 100%;
+	margin: 0;
+	padding: 0;
+}
+hr {
+	margin: 0;
+}
+#main {
+	width: 100%;
+}
+#header {
+    width: 100%;
+	text-align: center;
+}
+#header h1, #header p {
+    width: 100%;
+	margin: 0 ;
+}
+#topmenu{
+	font-size:150%;
+	width:100%
+}
+#topmenutd{text-align:center;}
+.right{float:right;}
+.righttd{text-align:right;}
+#content {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+#contenttd{
+    width: 100%;
+	vertical-align: top;
+}
+.article h1, .article_img {
+    width: 100%;
+	text-align: center;
+}
+#banners_240 {
+	border-left: 1px solid  #000;
+	width: 240px;
+}
+#footer p {
+    width: 100%;
+	text-align: center;
+}
+.article h1, .article h2, .article_img {
+    width: 100%;
+	text-align: center;
+}
